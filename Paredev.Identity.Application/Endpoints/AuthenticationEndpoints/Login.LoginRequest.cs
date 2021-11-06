@@ -1,4 +1,4 @@
-namespace Paredev.Identity.Application.Models;
+namespace Paredev.Identity.Application.Endpoints.AuthenticationEndpoints;
 
 public class LoginRequest
 {
