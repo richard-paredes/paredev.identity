@@ -1,15 +1,11 @@
-using System.Collections.Generic;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Paredev.Identity.Core;
-using Resources = Paredev.Identity.Core.Resources;
+using Paredev.Identity.Infrastructure.Data;
 
 namespace Paredev.Identity.Application;
 public class Startup
@@ -28,13 +24,10 @@ public class Startup
 
         // In production, the React files will be served from this directory
         services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
-
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("ParedevIdentity")
+        );
         services.AddIdentityServer()
-            .AddInMemoryClients(Clients.Get())
-            .AddInMemoryIdentityResources(Resources.GetIdentityResources())
-            .AddInMemoryApiResources(Resources.GetApiResources())
-            .AddInMemoryApiScopes(Resources.GetApiScopes())
-            .AddTestUsers(Users.Get())
             .AddDeveloperSigningCredential();
 
         services.AddCors(setup =>
