@@ -9,11 +9,8 @@ namespace Paredev.Identity.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
 {
-    private readonly IMediator _mediator;
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator mediator = null) : base(options)
-    {
-        _mediator = mediator;
-    }
+    private readonly IMediator? _mediator;
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator? mediator = null) : base(options) => _mediator = mediator;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -26,8 +23,6 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClai
     {
         int result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
-        // ignore events if no dispatcher provided
-        if (_mediator == null) return result;
         await PublishEntityEvents().ConfigureAwait(false);
 
         return result;
@@ -35,6 +30,9 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClai
 
     private async Task PublishEntityEvents()
     {
+        // ignore events if no dispatcher provided
+        if (_mediator == null) return;
+
         // dispatch events only if save was successful
         var entitiesWithEvents = ChangeTracker.Entries<IEventEntity>()
             .Select(e => e.Entity)
@@ -47,7 +45,7 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClai
             entity.Events.Clear();
             foreach (var domainEvent in events)
             {
-                await _mediator.Publish(domainEvent).ConfigureAwait(false);
+                await _mediator!.Publish(domainEvent).ConfigureAwait(false);
             }
         }
     }
