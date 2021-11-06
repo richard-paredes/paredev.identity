@@ -20,7 +20,7 @@ public class Error : BaseAsyncEndpoint
         _environment = environment;
     }
 
-    [HttpGet]
+    [HttpGet("error")]
     public override async Task<ActionResult> HandleAsync(ErrorRequest request, CancellationToken cancellationToken = default)
     {
         var error = await _interactionService.GetErrorContextAsync(request.ErrorId);

@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paredev.Identity.Application", "Paredev.Identity.Application\Paredev.Identity.Application.csproj", "{5AECCCD1-9724-4503-93B2-2D4CB35AF455}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paredev.Identity.Core", "Paredev.Identity.Core\Paredev.Identity.Core.csproj", "{E37B0590-779B-4274-9DD2-79D4671D4E1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paredev.Identity.Infrastructure", "Paredev.Identity.Infrastructure\Paredev.Identity.Infrastructure.csproj", "{449452C9-E1A7-4C28-80B6-3F04203C93EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paredev.SharedKernel", "Paredev.SharedKernel\Paredev.SharedKernel.csproj", "{169CA569-3077-498E-8A74-527050DBF0EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,9 @@ Global
 		{449452C9-E1A7-4C28-80B6-3F04203C93EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{449452C9-E1A7-4C28-80B6-3F04203C93EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{449452C9-E1A7-4C28-80B6-3F04203C93EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169CA569-3077-498E-8A74-527050DBF0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169CA569-3077-498E-8A74-527050DBF0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169CA569-3077-498E-8A74-527050DBF0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169CA569-3077-498E-8A74-527050DBF0EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

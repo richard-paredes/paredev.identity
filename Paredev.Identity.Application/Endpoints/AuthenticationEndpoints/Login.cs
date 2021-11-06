@@ -16,6 +16,7 @@ public class Login : BaseAsyncEndpoint
         _interactionService = interactionService;
     }
 
+    [HttpPost("/login")]
     public override async Task<ActionResult> HandleAsync([FromBody] LoginRequest request, CancellationToken cancellationToken = default)
     {
         var context = await _interactionService.GetAuthorizationContextAsync(request.RedirectUrl);

@@ -1,11 +1,15 @@
+using System.Collections.Generic;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Paredev.Identity.Core.Models;
 using Paredev.Identity.Infrastructure.Data;
 
 namespace Paredev.Identity.Application;
@@ -27,9 +31,24 @@ public class Startup
         services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseInMemoryDatabase("ParedevIdentity")
-        );
-        services.AddIdentityServer()
-            .AddDeveloperSigningCredential();
+        )
+        .AddIdentity<User, Role>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+        services.AddIdentityServer(options =>
+        {
+            options.Events.RaiseErrorEvents = true;
+            options.Events.RaiseInformationEvents = true;
+            options.Events.RaiseFailureEvents = true;
+            options.Events.RaiseSuccessEvents = true;
+
+            options.EmitStaticAudienceClaim = true;
+        })
+            .AddInMemoryApiResources(new List<ApiResource>())
+            .AddInMemoryApiScopes(new List<ApiScope>())
+            .AddInMemoryClients(new List<Client>())
+            .AddAspNetIdentity<User>();
 
         services.AddCors(setup =>
             setup.AddDefaultPolicy(policy =>

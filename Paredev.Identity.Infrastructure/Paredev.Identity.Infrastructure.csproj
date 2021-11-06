@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Paredev.Identity.Core\Paredev.Identity.Core.csproj" />
+    <ProjectReference Include="..\Paredev.SharedKernel\Paredev.SharedKernel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
