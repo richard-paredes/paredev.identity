@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Paredev.Identity/bin/Debug/net5.0/Paredev.Identity.dll",
+            "program": "${workspaceFolder}/Paredev.Identity.Application/bin/Debug/net6.0/Paredev.Identity.Application.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Paredev.Identity",
+            "cwd": "${workspaceFolder}/Paredev.Identity.Application",
             "stopAtEntry": false,
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
