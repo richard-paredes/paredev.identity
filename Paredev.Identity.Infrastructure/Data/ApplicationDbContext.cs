@@ -1,15 +1,31 @@
 using System.Reflection;
+using IdentityServer4.EntityFramework.Entities;
+using IdentityServer4.EntityFramework.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Paredev.Identity.Core.Models;
 using Paredev.SharedKernel.Domain;
+using UserClaim = Paredev.Identity.Core.Models.UserClaim;
 
 namespace Paredev.Identity.Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+public class ApplicationDbContext :
+    IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>,
+    IPersistedGrantDbContext,
+    IConfigurationDbContext
 {
     private readonly IMediator? _mediator;
+
+    public DbSet<PersistedGrant> PersistedGrants { get; set; }
+    public DbSet<DeviceFlowCodes> DeviceFlowCodesPersistedGrants { get; set; }
+    public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
+    public DbSet<Client> Clients { get; set; }
+    public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }
+    public DbSet<IdentityResource> IdentityResources { get; set; }
+    public DbSet<ApiResource> ApiResources { get; set; }
+    public DbSet<ApiScope> ApiScopes { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator? mediator = null) : base(options) => _mediator = mediator;
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -48,5 +64,10 @@ public class ApplicationDbContext : IdentityDbContext<User, Role, Guid, UserClai
                 await _mediator!.Publish(domainEvent).ConfigureAwait(false);
             }
         }
+    }
+
+    public Task<int> SaveChangesAsync()
+    {
+        throw new NotImplementedException();
     }
 }
