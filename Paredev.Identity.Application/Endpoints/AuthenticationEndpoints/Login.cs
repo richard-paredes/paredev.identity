@@ -20,7 +20,7 @@ public class Login : BaseAsyncEndpoint
     public override async Task<ActionResult> HandleAsync([FromBody] LoginRequest request, CancellationToken cancellationToken = default)
     {
         var context = await _interactionService.GetAuthorizationContextAsync(request.RedirectUrl);
-
+        
         return Unauthorized();
     }
 }
