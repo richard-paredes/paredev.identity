@@ -17,14 +17,13 @@ public class ApplicationDbContext :
 {
     private readonly IMediator? _mediator;
 
-    public DbSet<PersistedGrant> PersistedGrants { get; set; }
-    public DbSet<DeviceFlowCodes> DeviceFlowCodesPersistedGrants { get; set; }
-    public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
-    public DbSet<Client> Clients { get; set; }
-    public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }
-    public DbSet<IdentityResource> IdentityResources { get; set; }
-    public DbSet<ApiResource> ApiResources { get; set; }
-    public DbSet<ApiScope> ApiScopes { get; set; }
+    public DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
+    public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; } = null!;
+    public DbSet<Client> Clients { get; set; } = null!;
+    public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; } = null!;
+    public DbSet<IdentityResource> IdentityResources { get; set;} = null!;
+    public DbSet<ApiResource> ApiResources { get; set; } = null!;
+    public DbSet<ApiScope> ApiScopes { get; set; } = null!;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator? mediator = null) : base(options) => _mediator = mediator;
 
@@ -66,8 +65,8 @@ public class ApplicationDbContext :
         }
     }
 
-    public Task<int> SaveChangesAsync()
+    public async Task<int> SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        return await SaveChangesAsync();
     }
 }
