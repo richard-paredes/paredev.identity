@@ -31,7 +31,6 @@
             "type": "process",
             "args": [
                 "watch",
-                "run",
                 "${workspaceFolder}/Paredev.Identity.Application/Paredev.Identity.Application.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"

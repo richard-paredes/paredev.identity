@@ -1,14 +1,18 @@
-import { Flex } from '@chakra-ui/layout';
 import React from 'react';
-import { Page } from '../components/layout/Page';
+import {
+  Flex,
+  Link
+} from '@chakra-ui/layout';
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 export const SignUp: React.FC = (props) => {
-  return <Page>
-    <Page.Navbar />
-    <Page.Content>
-      <Flex>
-        Hello world!
-      </Flex>
-    </Page.Content>
-  </Page>
+  return (
+    <Flex>
+      Hello sign up!
+      <br />
+      <Link as={ReactRouterLink} to="/">Log in</Link>
+      <br/>
+      <Link as={ReactRouterLink} to="/forgot-password">Forgot password?</Link>
+    </Flex>
+  )
 }

@@ -58,8 +58,8 @@ public class Startup
                 .UseHsts();
         }
 
-        app.UseHttpsRedirection()
-            .UseStaticFiles()
+        app.UseStaticFiles()
+            //.UseHttpsRedirection()
             .UseSpaStaticFiles();
 
         app.UseRouting()
